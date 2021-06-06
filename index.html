@@ -1,0 +1,81 @@
+<html>
+    <head>
+        <title>  Paint  </title>
+    </head>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <body>
+        <center>
+            <canvas id="mycanvas" width="800" height="600">
+            </canvas>
+            <br>
+            <br>
+
+            <span><kbd>Radius</kbd></span>
+            <input id="write_radius"placeholder="type the radius">
+            <br>
+            <br>
+
+            <span><kbd>Color</kbd></kbr></span>
+            <input id="color" placeholder="type the color">
+            <br>
+            <br>
+
+            <span><kbd>Width Of The Line</kbd></span>
+            <input id="width_of_the_line" placeholder="type the width of the line">
+<br>
+
+<button id="clear_area">Clear Area</button>
+        </center>
+    </body>
+    <script>
+        canvas = document.getElementById("mycanvas");
+ctx = canvas.getContext("2d");
+
+var mouseEvent = "empty";
+var radius = 1;
+var width = 1;
+var color = "black";
+
+var last_position_of_x,last_position_of_y;
+canvas.addEventListener("mousedown", my_mouse_down);
+function my_mouse_down(e)
+{
+    radius = document.getElementById("write_radius").value;
+    width = document.getElementById("width_of_the_line").value;
+    color = document.getElementById("color").value;
+
+    mouseEvent = my_mouse_down; 
+}
+
+canvas.addEventListener("mousemove", my_mouse_move);
+function my_mouse_move(e)
+{
+    current_position_of_x = e.clientX - canvas.offsetLeft; 
+    current_position_of_y = e.clientY - canvas.offsetTop;
+
+    ( mouseEvent == "mousedown")
+    {
+        ctx.beginPath();
+        ctx.strokeStyle = color;
+        ctx.lineWidth = width;
+        ctx.arc(current_position_of_x, current_position_of_y, radius, 0, 2*Math.PI);
+        ctx.stroke();
+    }
+}
+
+canvas.addEventListener("mouseup", my_mouse_up);
+function my_mouse_up(e)
+{
+    mouseEvent = "mouseUP";
+}
+
+canvas.addEventListener("mouseleave", my_mouse_leave);
+function my_mouse_leave(e){
+  mouseEvent = "mouseleave";  
+}
+
+function clear_area() {
+    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+}
+    </script>
+</html>
